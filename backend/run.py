@@ -8,8 +8,7 @@ class Run:
         self.available = seat_available
 
     def add(self):
-        # save to db
-        pass
+        values= (self.busId, self.runningDate, self.available)
 
     def delete(self):
         # delete from db

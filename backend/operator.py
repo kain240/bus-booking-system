@@ -1,4 +1,4 @@
-from connector import cur
+from backend.connector import cur, client
 
 
 class Operator:
@@ -10,8 +10,9 @@ class Operator:
         self.email = email
 
     def add(self):
-        # save to db
-        pass
+        values = (self.operatorId, self.name, self.address, self.phone, self.email)
+        cur.execute('INSERT INTO new_operator ("operator_id", "operator_name", "operator_address", "operator_phone", "operator_email") VALUES (?, ?, ?, ?, ?)', values)
+        client.commit()
     def edit(self):
         # alter in db
         pass

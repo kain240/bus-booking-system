@@ -1,6 +1,6 @@
 # import run
 # import passenger
-from backend.connector import cur
+from backend.connector import cur, client
 
 
 class Booking:
@@ -18,8 +18,10 @@ class Booking:
         pass
 
     def make_booking(self):
-        cur.execute('insert into journey_booking values(self.start, self.end, self.date)')
-        cur.execute('select * from journey_booking')
+        values = (self.start, self.end, self.date)
+        cur.execute('INSERT INTO journey_booking ("to", "from", "date") VALUES (?, ?, ?)', values)
+        client.commit()
+
 
     def update_booking(self):
         # booking

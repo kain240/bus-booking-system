@@ -1,4 +1,6 @@
 from tkinter import *
+from backend import operator
+
 root=Tk()
 
 screen_width=root.winfo_screenwidth()
@@ -47,7 +49,6 @@ Address=Entry()
 Address.grid(row=6,column=9)
 Label(root,text='\t').grid(row=6,column=10)#want some space in between
 
-
  #Phone
 Label(root,text='Phone').grid(row=6,column=11)
 Phone=Entry()
@@ -62,6 +63,7 @@ Label(root,text='\t').grid(row=6,column=16)#want some space in between
 
 #Add
 def Add():
+    operator.Operator(Operator_Id.get(), Operator_Name.get(), Address.get(), Phone.get(), Email.get()).add()
     Label(root,text="operator added to the database").grid(row=9,column=2,columnspan=21)
 
 Button(root,text="Add",command=Add,fg="blue2",bg="springgreen").grid(row=6,column=17)
@@ -70,8 +72,6 @@ def Edit():
     Label(root,text="operator edited in the database").grid(row=9,column=2,columnspan=21)
 
 Button(root,text="Edit",command=Edit,fg="blue2",bg="springgreen").grid(row=6,column=19)
-
-
 
 
 Label(root,text="\n").grid(row=7,column=1,columnspan=3)#leaving an empty line

@@ -1,4 +1,4 @@
-from connector import cur
+from connector import cur, client
 
 
 class Route:
@@ -8,8 +8,9 @@ class Route:
         self.stationName = station_name
 
     def add(self):
-        # save to db
-        pass
+        values= (self.routId, self.stationId, self.stationName)
+        cur.execute('insert into new_route values(?, ?, ?), values')
+        client.commit()
 
     def delete(self):
         # delete from db

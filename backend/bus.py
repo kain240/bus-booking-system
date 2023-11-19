@@ -1,4 +1,4 @@
-from connector import cur
+from connector import cur, client
 
 
 class Bus:
@@ -11,9 +11,9 @@ class Bus:
         self.routeId = route_id
 
     def add(self):
-        # save to db
-        pass
-
+        values=(self.busId, self.busType, self.capacity, self.fare, self.operatorId, self.routeId)
+        cur.execute('insert into new_bus values(?, ?, ?, ?, ?, ?)', values)
+        client.commit()
     def edit(self):
         # alter in db
         pass
