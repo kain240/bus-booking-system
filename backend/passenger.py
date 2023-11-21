@@ -1,4 +1,4 @@
-from connector import cur, client
+from backend.connector import cur, client
 
 
 class Passenger:

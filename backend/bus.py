@@ -1,4 +1,4 @@
-from connector import cur, client
+from backend.connector import cur, client
 
 
 class Bus:
@@ -11,9 +11,10 @@ class Bus:
         self.routeId = route_id
 
     def add(self):
-        values=(self.busId, self.busType, self.capacity, self.fare, self.operatorId, self.routeId)
-        cur.execute('insert into new_bus values(?, ?, ?, ?, ?, ?)', values)
+        values = (self.busId, self.busType, self.capacity, self.fare, self.operatorId, self.routeId)
+        cur.execute('insert into new_bus ("bus_id" , "bus_type" , "capacity" , "fare" , "operator_id" , "route_id") values(?, ?, ?, ?, ?, ?)', values)
         client.commit()
+
     def edit(self):
         # alter in db
         pass

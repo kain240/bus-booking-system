@@ -15,4 +15,4 @@ cur.execute('CREATE TABLE IF NOT EXISTS new_bus("bus_id" varchar(10), "bus_type"
 
 cur.execute('CREATE TABLE IF NOT EXISTS new_route("route_id" varchar(10), "station_id" varchar(10), "station_name" varchar(30))')
 
-cur.execute('CREATE TABLE IF NOT EXISTS new_run("bus_id" varchar(10), "running_date" DATE, "available" int, "to" varchar(50), "from" varchar(50))')
+cur.execute('CREATE TABLE IF NOT EXISTS new_run("bus_id" varchar(10), "running_date" DATE, "available" int)')

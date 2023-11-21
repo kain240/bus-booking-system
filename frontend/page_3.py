@@ -17,13 +17,15 @@ img=PhotoImage(file="frontend/starbus.png")
 Label(root,image=img).grid(row=1,column=2,columnspan=maxwidth-4)
 #homeicon
 def home():
-    Label(root,text="please link home button to the root window").grid(row=100,column=2,columnspan=maxwidth)
+    root.destroy()
+    import page_2
 homeimage=PhotoImage(file="frontend/homeicon.png")
 Button(root,image=homeimage,command=home,fg="blue2",bg="springgreen").grid(row=1,column=maxwidth-4)
 Label(root,text='\t').grid(row=6,column=4)#want some margin
 
 def get_details():
     booking.Booking(To.get(), From.get(), JourneyDate.get()).make_booking()
+    Show_Bus()
 def Book_Seat():
     Label(root,text="please add functionality to book seat function").grid(row=90,column=2,columnspan=maxwidth)
 
