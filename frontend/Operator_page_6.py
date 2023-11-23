@@ -62,16 +62,17 @@ Email.grid(row=6,column=15)
 Label(root,text='\t').grid(row=6,column=16)#want some space in between
 
 #Add
-def Add():
+def add_operator():
     operator.Operator(Operator_Id.get(), Operator_Name.get(), Address.get(), Phone.get(), Email.get()).add()
     Label(root,text="operator added to the database").grid(row=9,column=2,columnspan=21)
 
-Button(root,text="Add",command=Add,fg="blue2",bg="springgreen").grid(row=6,column=17)
+Button(root,text="Add",command= add_operator,fg="blue2",bg="springgreen").grid(row=6,column=17)
 #Edit
-def Edit():
+def edit_operator():
+    operator.Operator(Operator_Id.get(), Operator_Name.get(), Address.get(), Phone.get(), Email.get()).edit()
     Label(root,text="operator edited in the database").grid(row=9,column=2,columnspan=21)
 
-Button(root,text="Edit",command=Edit,fg="blue2",bg="springgreen").grid(row=6,column=19)
+Button(root,text="Edit",fg="blue2",bg="springgreen", command= edit_operator).grid(row=6,column=19)
 
 
 Label(root,text="\n").grid(row=7,column=1,columnspan=3)#leaving an empty line

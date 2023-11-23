@@ -39,11 +39,20 @@ Seat_Available=Entry()
 Seat_Available.grid(row=6,column=10)
 Label(root,text="\t").grid(row=7,column=11)#some space
 
-def add_run():
-    run.Run(Bus_Id.get(), Running_Date.get(), Seat_Available.get()).add()
+#route_id
+Label(root,text="Route Id").grid(row=6,column=12)
+route_id=Entry()
+route_id.grid(row=6,column=13)
+Label(root,text="\t").grid(row=7,column=14)#some space
 
-Button(root,text="Add Bus",bg="lawngreen", command= add_run).grid(row=6,column=12)
+def add_run():
+    run.Run(Bus_Id.get(), route_id.get(), Running_Date.get(), Seat_Available.get()).add()
+
+def delete_run():
+    run.Run(Bus_Id.get(), route_id.get(), Running_Date.get()).delete()
+
+Button(root,text="Add Bus",bg="lawngreen", command= add_run).grid(row=6,column=15)
 Label(root,text="\t").grid(row=7,column=13)#some space
-Button(root,text="Delete Bus",bg="lawngreen").grid(row=6,column=14)
+Button(root,text="Delete Bus",bg="lawngreen", command= delete_run).grid(row=6,column=16)
 root.mainloop()
 

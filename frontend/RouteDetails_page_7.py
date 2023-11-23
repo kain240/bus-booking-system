@@ -30,28 +30,31 @@ Route_ID=Entry(root)
 Route_ID.grid(row=6,column=3)
 Label(root,text="\t",).grid(row=6,column=4)
 
-#Station_name
-Label(root,text="Station_name").grid(row=6,column=5)
-Station_name=Entry(root)
-Station_name.grid(row=6,column=6)
+#Start
+Label(root,text="Start").grid(row=6,column=5)
+start=Entry(root)
+start.grid(row=6,column=6)
 Label(root,text="\t",).grid(row=6,column=7)
 
-#Station_ID
-Label(root,text="Station_ID").grid(row=6,column=8)
-Station_ID=Entry(root)
-Station_ID.grid(row=6,column=9)
+#Stop
+Label(root,text="Stop").grid(row=6,column=8)
+stop=Entry(root)
+stop.grid(row=6,column=9)
 Label(root,text="\t",).grid(row=6,column=10)
 
 
 def add_route():
-    route.Route(Route_ID.get(), Station_ID.get(), Station_name.get(), 'guna', 'indore').add()
+    route.Route(Route_ID.get(), start.get(), stop.get()).add()
+
+def delete_route():
+    route.Route(Route_ID.get(), start.get(), stop.get()).delete()
 
 #add route
 Button(root,text="Add Route",bg="lawn green", command= add_route).grid(row=6,column=11)
 Label(root,text="\t",).grid(row=6,column=12)
 
 #delete route
-Button(root,text="delete Route",bg="lawn green",fg="red").grid(row=6,column=13)
+Button(root,text="delete Route",bg="lawn green",fg="red", command= delete_route).grid(row=6,column=13)
 
 
 

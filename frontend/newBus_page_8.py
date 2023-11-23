@@ -51,19 +51,22 @@ operator.grid(row=8,column=13)
 Label(root,text="\t").grid(row=8,column=14)#need some space
 
 #Route id
-Label(root,text="Route Id").grid(row=8,column=15)
-route=Entry()
-route.grid(row=8,column=16)
-Label(root,text="\n").grid(row=9,column=1)#NewLine
+# Label(root,text="Route Id").grid(row=8,column=15)
+# route=Entry()
+# route.grid(row=8,column=16)
+# Label(root,text="\n").grid(row=9,column=1)#NewLine
 
 def add_bus():
-    bus.Bus(bus_id.get(), 'ac', capacity.get(), Fare.get(), operator.get(), route.get()).add()
+    bus.Bus(bus_id.get(), 'ac', capacity.get(), Fare.get(), operator.get()).add()
+
+def edit_bus():
+    bus.Bus(bus_id.get(), 'ac', capacity.get(), Fare.get(), operator.get()).edit()
 
 Button(root,text="Add Bus",bg="Lightblue", command= add_bus).grid(row=10,column=2,columnspan=13)
 
 Label(root,text="\t").grid(row=9,column=3)#need some space
 
-Button(root,text="Edit Bus",bg="Lightblue").grid(row=10,column=4,columnspan=13)
+Button(root,text="Edit Bus",bg="Lightblue", command= edit_bus).grid(row=10,column=4,columnspan=13)
 
 
 root.mainloop()
