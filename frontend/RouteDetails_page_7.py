@@ -42,8 +42,9 @@ Station_ID=Entry(root)
 Station_ID.grid(row=6,column=9)
 Label(root,text="\t",).grid(row=6,column=10)
 
+
 def add_route():
-    route.Route(Route_ID.get(), Station_ID.get(), Station_name.get()).add()
+    route.Route(Route_ID.get(), Station_ID.get(), Station_name.get(), 'guna', 'indore').add()
 
 #add route
 Button(root,text="Add Route",bg="lawn green", command= add_route).grid(row=6,column=11)

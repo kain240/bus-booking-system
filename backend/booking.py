@@ -1,5 +1,3 @@
-# import run
-# import passenger
 from backend.connector import cur, client
 
 
@@ -9,19 +7,22 @@ class Booking:
         self.end = end
         self.date = date
 
-    def find_runs(self,date,start,end):
-        # run_coll.find()
+    def find_runs(self):
         pass
+        # routes = cur.execute('select id from new_route where new_route."from"= self.start & new_route.end = self.end')
+        # trips = {trip.date = self.date and trip.route_id $in routes }
+        # return trips
+
 
     def show_run(self):
-        # run
+        # find_runs()
         pass
+
 
     def make_booking(self):
         values = (self.start, self.end, self.date)
         cur.execute('INSERT INTO journey_booking ("to", "from", "date") VALUES (?, ?, ?)', values)
         client.commit()
-
 
     def update_booking(self):
         # booking
