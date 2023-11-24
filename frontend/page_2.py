@@ -1,5 +1,5 @@
 from tkinter import *
-from page_3 import Page3
+from frontend.page_3 import Page3
 
 class Page2:
     def page2(self):
@@ -23,11 +23,11 @@ class Page2:
 
         def checkBooking():
             root.destroy()
-            import page_4
+            import frontend.page_4
 
         def addBus():
             root.destroy()
-            import page_5
+            import frontend.page_5
 
         l1= Label(root, text='Online Bus Booking System', font='Arial 35 ', fg='red', bg='powder blue')
         l1.grid(row=1,column=1, pady=50)

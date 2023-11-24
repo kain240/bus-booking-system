@@ -1,5 +1,5 @@
 from tkinter import *
-from page_2 import Page2
+from frontend.page_2 import Page2
 
 
 class Page1:

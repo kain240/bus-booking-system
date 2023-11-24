@@ -14,7 +14,7 @@ Label(root, text="\t").grid(row=1, column=9)  # want some space
 # home icon
 def home():
     root.destroy()
-    import page_2
+    import frontend.page_2
 
 homeimage = PhotoImage(file="frontend/homeicon.png")
 Button(root, image=homeimage, command=home, fg="blue2", bg="springgreen").grid(row=1, column=10)

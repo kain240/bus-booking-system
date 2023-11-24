@@ -9,23 +9,23 @@ Label(root,image=img).grid(row=1,column=2,columnspan=7)
 #homeicon
 def home():
     root.destroy()
-    import page_2
+    import frontend.page_2
 
 def newOperator():
     root.destroy()
-    import Operator_page_6
+    import frontend.Operator_page_6
 
 def newBus():
     root.destroy()
-    import newBus_page_8
+    import frontend.newBus_page_8
 
 def newRoute():
     root.destroy()
-    import RouteDetails_page_7
+    import frontend.RouteDetails_page_7
 
 def newRun():
     root.destroy()
-    import run_page_9
+    import frontend.run_page_9
 
 homeimage=PhotoImage(file="frontend/homeicon.png")
 Button(root,image=homeimage,command=home,fg="blue2",bg="springgreen").grid(row=1,column=9)

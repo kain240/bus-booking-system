@@ -1,4 +1,4 @@
-# bus-booking-system
+# A Bus Booking System
 
 Where Bus services can,
 * register their bus-service(name, contact)
@@ -11,5 +11,6 @@ And users can,
 * select one of the listed buses
 * enter booking details(contact, num_of_seats) and confirm booking
 
-## To run the code
-`python3 frontend/page1.py`
+---
+#### To run the app
+`python3 app.py`
