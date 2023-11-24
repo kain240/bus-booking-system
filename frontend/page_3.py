@@ -33,16 +33,10 @@ class Page3:
         def get_runs():
             new_booking = journey_booking.Booking( From.get(), To.get(), JourneyDate.get())
             runs = new_booking.find_runs()
-
-            trips = []
-            for i in runs:
-                trips+=list(i)
-            trips.pop(3)
-            trips.pop(3)
-            print(trips)
+            print(runs)
             Show_Bus()
 
-            Label(root, text= f"{trips}").grid(row=9,column=2)
+            Label(root, text= f"{runs}").grid(row=9,column=2)
 #            update_runs_on_UI(runs)
 
         def make_booking():
