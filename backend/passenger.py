@@ -2,7 +2,7 @@ import uuid
 
 from backend.connector import cur, client
 class Passenger:
-    def __init__(self, name, age, gender, mobile_no, no_of_seats, run_id):
+    def __init__(self, name, gender, no_of_seats, mobile_no, age, run_id):
         self.name = name
         self.gender = gender
         self.noOfSeats = no_of_seats

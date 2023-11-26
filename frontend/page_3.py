@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 import backend.journey_booking
 from backend import journey_booking
 from backend import passenger
@@ -20,7 +21,7 @@ class Page3:
 
         #image
         img=PhotoImage(file="frontend/starbus.png")
-        Label(root, image=img).grid(row=1,column=2,columnspan=maxwidth-4)
+        Label(root, image=img).grid(row=1,column=4,columnspan=maxwidth-4)
         #homeicon
         def home():
             root.destroy()
@@ -28,7 +29,7 @@ class Page3:
 
 
         homeimage=PhotoImage(file="frontend/homeicon.png")
-        Button(root,image=homeimage,command=home,fg="blue2",bg="springgreen").grid(row=1,column=maxwidth-4)
+        Button(root,image=homeimage,command=home,fg="blue2",bg="springgreen").grid(row=1,column=maxwidth-2, rowspan=2)
         Label(root,text='\t').grid(row=6,column=4)#want some margin
 
         def get_runs():
@@ -46,21 +47,21 @@ class Page3:
         Label(root,text="\n").grid(row=3,column=1,columnspan=3)#leaving an empty line
 
         #journey details
-        Label(root,text="Enter Journey Details",font="Arial 10 bold",bg='spring green',fg="green4").grid(row=4,column=2,columnspan=maxwidth)
+        Label(root,text="Enter Journey Details",font="Arial 12 bold",bg='spring green',fg="green4").grid(row=4,column=2,columnspan=maxwidth)
         Label(root,text="\n").grid(row=5,column=1,columnspan=maxwidth)#leaving an empty line
          #destination
         Label(root,text='To').grid(row=6,column=2)
-        To=Entry()
+        To=Entry(root)
         To.grid(row=6,column=3)
         Label(root,text='\t').grid(row=6,column=4)#want some space in between
          #from
         Label(root,text='From').grid(row=6,column=5)
-        From=Entry()
+        From=Entry(root)
         From.grid(row=6,column=6)
         Label(root,text='\t').grid(row=6,column=7)#want some space in between
          #date
         Label(root,text='JourneyDate').grid(row=6,column=8)
-        JourneyDate=Entry()
+        JourneyDate=Entry(root)
         JourneyDate.grid(row=6,column=9)
         Label(root,text='\t').grid(row=6,column=10)#want some space in between
 
@@ -79,6 +80,16 @@ class Page3:
                 print(choice_is)
                 return(choice_is[0])
 
+            def fare_is():
+                selected_bus_no = selected_bus.get()
+                choice_is = list(runs[selected_bus_no])
+                return (choice_is[4])
+
+            def bus_booking_details():
+                selected_bus_no = selected_bus.get()
+                choice_is = list(runs[selected_bus_no])
+                return (choice_is)
+
             style = ttk.Style()
             style.configure('TRadiobutton', background='light green', relief='raised')
 
@@ -96,58 +107,130 @@ class Page3:
                 Label(root, text=run[4]).grid(row=counter, column=10, columnspan=2)
 
 
-            Label(root,text="\n").grid(row=110,column=1,columnspan=3)#leaving an empty line
+            #Label(root,text="").grid(row=109,column=1,columnspan=3)#leaving an empty line
             #fill passenger details
-            Label(root,text="Fill Passenger Details to book the bus ticket",bg="turquoise1",fg="red", font='15').grid(row=111,column=2,columnspan=maxwidth)
-            Label(root,text="Name").grid(row=112,column=2)
-            Name=Entry(root)
-            Name.grid(row=112,column=3)
-            Label(root,text='\t').grid(row=112,column=4)#want some space in between
-            #radio button for gender
-            gender='male'
-            def show_gender(e):
-                global gender
-                gender=combobox.get()
+            def fill_passenger_details():
+                Label(root,text="Fill Passenger Details to book the bus ticket",bg="turquoise1",fg="red", font='15').grid(row=110,column=2,columnspan=maxwidth)
+                Label(root, text="\n").grid(row=111, column=1, columnspan=3)
+                Label(root,text="Name").grid(row=112,column=2)
+                Name=Entry(root)
+                Name.grid(row=112,column=3)
+                Label(root,text='\t').grid(row=112,column=4)#want some space in between
+                #radio button for gender
+                gender='male'
+                def show_gender(e):
+                    global gender
+                    gender=combobox.get()
 
 
-            Label(root,text="Gender").grid(row=112,column=5)
-            gender_list=['Male', 'Female', 'Third Gender']
-            selected_option= StringVar()
-            selected_option.set(gender_list[0])
-            combobox= ttk.Combobox(root, textvariable=selected_option, value=gender_list)
-            combobox.grid(row=112, column=6)
-            combobox.bind("<<ComboboxSelected>>", show_gender)
+                Label(root,text="Gender").grid(row=112,column=5)
+                gender_list=['Male', 'Female', 'Third Gender']
+                selected_option= StringVar()
+                selected_option.set(gender_list[0])
+                combobox= ttk.Combobox(root, textvariable=selected_option, value=gender_list)
+                combobox.grid(row=112, column=6)
+                combobox.bind("<<ComboboxSelected>>", show_gender)
 
-            Label(root,text='\t').grid(row=112,column=7)#want some space in between
-            #number of seats
-            Label(root,text="No. of seats").grid(row=112,column=8)
-            No_of_seats=Entry(root)
-            No_of_seats.grid(row=112,column=9)
-            Label(root,text='\t').grid(row=112,column=10)#want some space in between
-            #mobile number
-            Label(root,text="mobile number").grid(row=112,column=11)
-            Mobile_Number=Entry(root)
-            Mobile_Number.grid(row=112,column=12)
-            Label(root,text='\t').grid(row=112,column=13)#want some space in between
-            #age
-            Label(root,text="Age").grid(row=112,column=14)
-            Age=Entry(root)
-            Age.grid(row=112,column=15)
+                Label(root,text='\t').grid(row=112,column=7)#want some space in between
+                #number of seats
+                Label(root,text="No. of seats").grid(row=112,column=8)
+                No_of_seats=Entry(root)
+                No_of_seats.grid(row=112,column=9)
+                Label(root,text='\t').grid(row=112,column=10)#want some space in between
+                #mobile number
+                Label(root,text="mobile number").grid(row=112,column=11)
+                Mobile_Number=Entry(root)
+                Mobile_Number.grid(row=112,column=12)
+                Label(root,text='\t').grid(row=112,column=13)#want some space in between
+                #age
+                Label(root,text="Age").grid(row=112,column=14)
+                Age=Entry(root)
+                Age.grid(row=112,column=15)
+                Label(root, text='\t').grid(row=112, column=16)  # want some space in between
+                def make_booking():
+                    journey_booking.BookingTicket(Mobile_Number.get(), select_bus()).set_booking()
+                    print('done')
+                def Book_Seat():
+                    passenger.Passenger(Name.get(), gender, No_of_seats.get(), Mobile_Number.get(), Age.get(), select_bus()).add()
+                    #Label(root, text="Booked successfully").grid(row=115, column=2, columnspan=maxwidth)
+                    amount= int(No_of_seats.get()) * int(fare_is())
+                    result = messagebox.askyesno('Fare Confirm', 'total amount to paid Rs. ' + str(amount))
 
-            def make_booking():
-                journey_booking.BookingTicket(Mobile_Number.get(), select_bus()).set_booking()
-                print('done')
-            def Book_Seat():
-                passenger.Passenger(Name.get(), gender, No_of_seats.get(), Mobile_Number.get(), Age.get(), select_bus()).add()
-                Label(root, text="Booked successfully").grid(row=115, column=2, columnspan=maxwidth)
+                    def view_ticket():
+                        new_window = Toplevel(root)
+                        new_window.title("Bus Ticket")
 
-                make_booking()
+                        screen_width = new_window.winfo_screenwidth()
+                        screen_height = new_window.winfo_screenheight()
+                        new_window.geometry(f'{screen_width}x{screen_height}')
 
-            #Book_Seat
-            Button(root,text="Book Seat",command=Book_Seat).grid(row=12,column=16)
-            Label(root,text='\t').grid(row=12,column=17)#want some space in between
-            Label(root,text="\n").grid(row=13,column=1,columnspan=3)#leaving an empty line
-        Button(root,text="show bus",command=get_runs,fg="blue2",bg="springgreen").grid(row=6,column=14)
+                        img = PhotoImage(file='frontend/starbus.png')
+                        photo = Label(new_window, image=img)
+                        photo.image = img  # Keeping a reference to avoid garbage collection
+                        photo.grid(row=0, column=2, padx=550)
+
+                        l1 = Label(new_window, text='Online Bus Booking System', font='Arial 20 ', fg='red', bg='powder blue')
+                        l1.grid(row=1, column=2, pady=20)
+
+                        Label(new_window, text='Bus Ticket', font='Arial 20 ').grid(row=2, column=2)
+                        Label(new_window, text='').grid(row=3, column=2)
+
+                        fr = Frame(new_window, relief="raised", bd=4)
+                        Label(fr, text="passengers", font= 'bold').grid(row=1, column=1)
+                        Label(fr, text=Name.get(), font= 'bold').grid(row=1, column=2)
+
+                        Label(fr, text="No. Of Seat", font= 'bold').grid(row=2, column=1)
+                        Label(fr, text=No_of_seats.get(), font= 'bold').grid(row=2, column=2)
+
+                        Label(fr, text="Age", font= 'bold').grid(row=3, column=1)
+                        Label(fr, text=Age.get(), font= 'bold').grid(row=3, column=2)
+
+                        Label(fr, text="Booking Ref.", font= 'bold').grid(row=4, column=1)
+                        Label(fr, text="Booking", font= 'bold').grid(row=4, column=2)
+
+                        bus_details = bus_booking_details()
+
+                        Label(fr, text="Travel on", font= 'bold').grid(row=5, column=1)
+                        Label(fr, text=JourneyDate.get(), font= 'bold').grid(row=5, column=2)
+                        Label(fr, text="\n").grid(row=6, column=1)  # leaving an empty line
+
+                        Label(fr, text="Boarding Point :", font= 'bold').grid(row=7, column=2, columnspan=2)
+                        Label(fr, text="Destination :", font= 'bold').grid(row=8, column=2, columnspan=2)
+                        Label(fr, text=To.get(), font= 'bold').grid(row=7, column=4)
+                        Label(fr, text=From.get(), font= 'bold').grid(row=8, column=4)
+                        Label(fr, text="\t").grid(row=1, column=3)  # want some space
+                        # second column
+                        amount = int(No_of_seats.get()) * int(fare_is())
+
+                        Label(fr, text="Gender", font= 'bold').grid(row=1, column=4)
+                        Label(fr, text="Phone", font= 'bold').grid(row=2, column=4)
+                        Label(fr, text="Fare", font= 'bold').grid(row=3, column=4)
+                        Label(fr, text="Bus Detail", font= 'bold').grid(row=4,column=4)
+
+                        Label(fr, text=gender, font= 'bold').grid(row=1, column=5)
+                        Label(fr, text=Mobile_Number.get(), font= 'bold').grid(row=2, column=5)
+                        Label(fr, text=str(amount), font= 'bold').grid(row=3, column=5)
+                        Label(fr, text=bus_details[1], font= 'bold').grid(row=4, column=5)
+
+                        Label(fr, text="\t").grid(row=1, column=55)  # want some space
+                        Label(fr, text='\n').grid(row=8, column=1)
+                        Label(fr, text="\tTotal amount " + str(amount) + " to be paid at the time of boarding", font= 'bold').grid(row=9, column=1,
+                                                                                                       columnspan=5)
+
+                        fr.grid(row=6, column=2, columnspan=5)
+
+
+                    if result==True:
+                        make_booking()
+                        view_ticket()
+                #Book_Seat
+                Button(root,text="Book Seat",command=Book_Seat, bg='light green').grid(row=112,column=17)
+                Label(root,text='\t').grid(row=12,column=17)#want some space in between
+                Label(root,text="\n").grid(row=13,column=1,columnspan=3)#leaving an empty line
+
+            Button(root, text='Proceed To Book', bg='light green', command=fill_passenger_details).grid(row=counter, column=12)
+
+        Button(root,text="show bus",command=get_runs,fg="blue2",bg="springgreen").grid(row=6,column=12)
 
         Label(root,text="\n").grid(row=7,column=1,columnspan=3)#leaving an empty line
 
