@@ -1,12 +1,13 @@
 from tkinter import *
 from backend import operator
+from tkinter import messagebox
 
 root=Tk()
 
 screen_width=root.winfo_screenwidth()
 screen_height=root.winfo_screenheight()
 root.geometry(f'{screen_width}x{screen_height}')
-root.title('Online Bus Booking')
+root.title('Add New Operator')
 
 Label(root,text="\t        \t").grid(row=1,column=1)#image should be centre aligned
 
@@ -64,13 +65,13 @@ Label(root,text='\t').grid(row=6,column=16)#want some space in between
 #Add
 def add_operator():
     operator.Operator(Operator_Id.get(), Operator_Name.get(), Address.get(), Phone.get(), Email.get()).add()
-    Label(root,text="operator added to the database").grid(row=9,column=2,columnspan=21)
+    result = messagebox.showinfo('Operator entry', 'operator recorded successfully')
 
 Button(root,text="Add",command= add_operator,fg="blue2",bg="springgreen").grid(row=6,column=17)
 #Edit
 def edit_operator():
     operator.Operator(Operator_Id.get(), Operator_Name.get(), Address.get(), Phone.get(), Email.get()).edit()
-    Label(root,text="operator edited in the database").grid(row=9,column=2,columnspan=21)
+    result = messagebox.showinfo('Operator entry update', 'operator recorde updated successfully')
 
 Button(root,text="Edit",fg="blue2",bg="springgreen", command= edit_operator).grid(row=6,column=19)
 

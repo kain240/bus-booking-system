@@ -1,15 +1,16 @@
 from tkinter import *
 from backend import route
+from tkinter import messagebox
 root=Tk()
 
 screen_width=root.winfo_screenwidth()
 screen_height=root.winfo_screenheight()
 root.geometry(f'{screen_width}x{screen_height}')
-root.title('Online Bus Booking')
+root.title('Add New Route')
 
 img=PhotoImage(file="frontend/starbus.png")
 Label(root,text="\t").grid(row=1,column=1)#want some space
-Label(root,image=img).grid(row=1,column=2,columnspan=7)
+Label(root,image=img).grid(row=1,column=2,columnspan=17)
 
 
 #homeicon
@@ -17,10 +18,12 @@ def home():
     Label(root,text="please link home button to the root window").grid(row=100,column=2,columnspan=8)
 
 homeimage=PhotoImage(file="frontend/homeicon.png")
-Button(root,image=homeimage,command=home,fg="blue2",bg="springgreen").grid(row=1,column=9)
-Label(root,text="Online Bus Booking System",font='arial 20 bold',bg="light blue",fg="red").grid(row=2,column=2,columnspan=9)
+
+Button(root,image=homeimage,command=home,fg="blue2",bg="springgreen").grid(row=1,column=14)
+Label(root, text='\t\t\t\t').grid(row=1, column=0)
+Label(root,text="Online Bus Booking System",font='arial 20 bold',bg="light blue",fg="red").grid(row=2,column=2,columnspan=17)
 Label(root,text="\n").grid(row=3,column=2)#leaving a blank line
-Label(root,text="Add New Details to Database").grid(row=4,column=2,columnspan=9)
+Label(root,text="Add Bus Route Details", font='arial 15 bold', fg='green').grid(row=4,column=2,columnspan=17)
 Label(root,text="\n",).grid(row=5,column=2,columnspan=3)#leaving an empty line
 
 
@@ -45,9 +48,11 @@ Label(root,text="\t",).grid(row=6,column=10)
 
 def add_route():
     route.Route(Route_ID.get(), start.get(), stop.get()).add()
+    result = messagebox.showinfo('Add Bus Route', 'New Bus route added successfully')
 
 def delete_route():
     route.Route(Route_ID.get(), start.get(), stop.get()).delete()
+    result = messagebox.showinfo('Delete Bus Route', 'Bus route deleted successfully')
 
 #add route
 Button(root,text="Add Route",bg="lawn green", command= add_route).grid(row=6,column=11)

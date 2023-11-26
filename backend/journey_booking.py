@@ -12,7 +12,8 @@ class Booking:
 
     def find_runs(self):
 
-        print(f"finding runs(operator, bus_type, fare, seats_available) for trip({self.start} to {self.end} on {self.date})")
+        print(
+            f"finding runs(operator, bus_type, fare, seats_available) for trip({self.start} to {self.end} on {self.date})")
         result = []
         # fetching all the route_ids(routes) where start and stop the search input
         cur.execute('SELECT id FROM route WHERE start = ? AND stop = ?', (self.start, self.end))
@@ -29,7 +30,6 @@ class Booking:
             bus_info = cur.fetchall()
 
             for bus in bus_info:
-
                 cur.execute('SELECT name FROM operator WHERE id = ? ', (bus[0],))
                 operator = cur.fetchall()
 
@@ -60,24 +60,45 @@ class BookingTicket:
         cur.execute('insert into booking values(?, ?, ?)', values)
         client.commit()
 
-class ShowTicket:
 
-    def __init__(self, passenger_id):
-        self.passenger_id = passenger_id
-    def get_booking(self):
-        tickets = []
-        cur.execute('select run_id from booking where passenger_id = ?', (self.passenger_id, ))
-        run_ids = tuple([row[0] for row in cur.fetchall()])
-        #placeholders = ','.join(['?'] * len(run_ids))
+def get_booking(passenger_mobile_num):
+    cur.execute('select run_id from booking where passenger_id = ?', (passenger_mobile_num,))
+    run_ids = tuple([row[0] for row in cur.fetchall()])
+
+    placeholders = ','.join(['?' for _ in run_ids])
+    query = f'SELECT name, gender, no_seats, mobile_num, age, run_id FROM passenger WHERE mobile_num = ? AND "run_id" IN ({placeholders})'
+    parameters = (passenger_mobile_num,) + tuple(run_ids)
+    cur.execute(query, parameters)
+    tickets = cur.fetchall()
+    return tickets
+
+def get_running_date(ID):
+    cur.execute('select bus_id, route_id, running_date from run where id= ?', (ID,))
+    ticket_date = cur.fetchall()
+    print (ticket_date)
+    return ticket_date[0]
+
+def get_to_from(ID):
+    cur.execute('select start, stop from route where id= ?', (ID,))
+    to_and_from = cur.fetchall()
+    print (to_and_from)
+    return to_and_from[0]
+
+def get_fare_type(ID):
+    cur.execute('select fare, type, operator_id from bus where id= ?', (ID,))
+    fare_and_type= cur.fetchall()
+    return fare_and_type[0]
+
+def get_bus_name(ID):
+    cur.execute('select name from operator where id= ?', (ID,))
+    bus_name= cur.fetchall()
+    return bus_name[0][0]
 
 
-        #cur.execute(f 'select name, gender, no_seats, mobile_num, age from passenger where "run_id" in ({placeholders})', (run_ids))
 
-        placeholders = ','.join(['?' for _ in run_ids])
-        cur.execute(f'SELECT name, gender, no_seats, mobile_num, age FROM passenger WHERE mobile_num = ? and run_id IN ({placeholders})',((self.passenger_id, ), run_ids))
-        tickets = cur.fetchall()
-        print(tickets)
 
-    # def update_booking(self):
-    #     cur.execute('update booking set passenger_id = ?, run_id = ? where id = ?', (self.passenger_id, self.run_id, self.id))
-    #     client.commit()
+
+
+
+
+# fare, bus, type
