@@ -1,5 +1,5 @@
 from tkinter import *
-
+from tkinter import ttk
 import backend.journey_booking
 from backend import journey_booking
 from backend import passenger
@@ -26,6 +26,7 @@ class Page3:
             root.destroy()
 
 
+
         homeimage=PhotoImage(file="frontend/homeicon.png")
         Button(root,image=homeimage,command=home,fg="blue2",bg="springgreen").grid(row=1,column=maxwidth-4)
         Label(root,text='\t').grid(row=6,column=4)#want some margin
@@ -38,9 +39,6 @@ class Page3:
 
             # update_runs_on_UI(runs)
 
-        def make_booking():
-            run_id, payment = runs_list_on_UI[selected_id].run_id, payment_done
-            new_booking.set_booking(run_id, payment)
 
 
         #label1 online bus booking system
@@ -74,23 +72,52 @@ class Page3:
             Label(root, text='Availablity').grid(row=8, column=8, columnspan=2)
             Label(root, text='Fare').grid(row=8, column=10, columnspan=2)
 
+            def select_bus():
+                selected_bus_no=selected_bus.get()
+                print(selected_bus_no)
+                choice_is= list(runs[selected_bus_no])
+                print(choice_is)
+                return(choice_is[0])
+
+            style = ttk.Style()
+            style.configure('TRadiobutton', background='light green', relief='raised')
+
             counter = 8
-            for run in runs:
+            selected_bus = IntVar()
+
+
+            for index, run in enumerate(runs):
                 counter += 1
-                Button(root, text='Select').grid(row=counter, column=2, columnspan=2)
-                Label(root, text=run[0]).grid(row=counter, column=4, columnspan=2)
-                Label(root, text=run[1]).grid(row=counter, column=6, columnspan=2)
-                Label(root, text=run[2]).grid(row=counter, column=8, columnspan=2)
-                Label(root, text=run[3]).grid(row=counter, column=10, columnspan=2)
+                ttk.Radiobutton(root, text='Select ' + str(index), variable=selected_bus, value=index,
+                            command=select_bus, style= 'TRadiobutton').grid(row=counter, column=2, columnspan=2, padx=5, pady=5)
+                Label(root, text=run[1]).grid(row=counter, column=4, columnspan=2)
+                Label(root, text=run[2]).grid(row=counter, column=6, columnspan=2)
+                Label(root, text=run[3]).grid(row=counter, column=8, columnspan=2)
+                Label(root, text=run[4]).grid(row=counter, column=10, columnspan=2)
+
 
             Label(root,text="\n").grid(row=110,column=1,columnspan=3)#leaving an empty line
             #fill passenger details
-            Label(root,text="Fill Passenger Details to book the bus ticket",bg="turquoise1",fg="red").grid(row=11,column=2,columnspan=maxwidth)
+            Label(root,text="Fill Passenger Details to book the bus ticket",bg="turquoise1",fg="red", font='15').grid(row=111,column=2,columnspan=maxwidth)
             Label(root,text="Name").grid(row=112,column=2)
             Name=Entry(root)
             Name.grid(row=112,column=3)
             Label(root,text='\t').grid(row=112,column=4)#want some space in between
             #radio button for gender
+            gender='male'
+            def show_gender(e):
+                global gender
+                gender=combobox.get()
+
+
+            Label(root,text="Gender").grid(row=112,column=5)
+            gender_list=['Male', 'Female', 'Third Gender']
+            selected_option= StringVar()
+            selected_option.set(gender_list[0])
+            combobox= ttk.Combobox(root, textvariable=selected_option, value=gender_list)
+            combobox.grid(row=112, column=6)
+            combobox.bind("<<ComboboxSelected>>", show_gender)
+
             Label(root,text='\t').grid(row=112,column=7)#want some space in between
             #number of seats
             Label(root,text="No. of seats").grid(row=112,column=8)
@@ -107,9 +134,15 @@ class Page3:
             Age=Entry(root)
             Age.grid(row=112,column=15)
 
+            def make_booking():
+                journey_booking.BookingTicket(Mobile_Number.get(), select_bus()).set_booking()
+                print('done')
             def Book_Seat():
-                passenger.Passenger(Name.get(), 'F', No_of_seats.get(), Mobile_Number.get(), Age.get()).add()
-                Label(root, text="Booked successfully").grid(row=90, column=2, columnspan=maxwidth)
+                passenger.Passenger(Name.get(), gender, No_of_seats.get(), Mobile_Number.get(), Age.get(), select_bus()).add()
+                Label(root, text="Booked successfully").grid(row=115, column=2, columnspan=maxwidth)
+
+                make_booking()
+
             #Book_Seat
             Button(root,text="Book Seat",command=Book_Seat).grid(row=12,column=16)
             Label(root,text='\t').grid(row=12,column=17)#want some space in between

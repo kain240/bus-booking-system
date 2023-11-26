@@ -1,5 +1,5 @@
 from tkinter import *
-
+from backend import journey_booking
 root = Tk()
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
@@ -29,7 +29,7 @@ Label(root, text="Check Your Booking", font="Arial 15 bold", fg="green4", bg="la
                                                                                                columnspan=7)
 Label(root, text="\n").grid(row=5, column=2)  # leaving an empty line
 Label(root, text="Enter your Mobile Number:").grid(row=5, column=3)
-mob = Entry()
+mob = Entry(root)
 mob.grid(row=5, column=4)
 
 
@@ -62,6 +62,13 @@ def check():
     Label(fr, text="\ttotal amount<query>to be paid at the time of boarding").grid(row=9, column=1, columnspan=5)
 
     fr.grid(row=6, column=2, columnspan=5)
+    get_ticket()
+
+
+def get_ticket():
+    ticket = journey_booking.ShowTicket(mob.get()).get_booking()
+    print(ticket)
+    return ticket
 
 
 Button(root, text="Check Booking", command=check).grid(row=5, column=6)

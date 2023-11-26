@@ -26,6 +26,10 @@ class Page1:
         sumbitted.pack()
         l2 = Label(root, text='Project Based Learning', fg='red', font='Arial 10 bold')
         l2.pack()
+        Label(root, text='\n\n\n').pack()
+        Label(root, text='Press any key to continue...').pack()
+
+
 
         def page2(e):
             root.destroy()

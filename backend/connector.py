@@ -7,5 +7,5 @@ cur.execute('CREATE TABLE IF NOT EXISTS operator ("id" varchar(10), "name" varch
 cur.execute('CREATE TABLE IF NOT EXISTS bus      ("id" varchar(10), "type" varchar(6), "capacity" int, "fare" int, "operator_id" varchar(10))')
 cur.execute('CREATE TABLE IF NOT EXISTS route    ("id" varchar(10), "start" varchar(50), "stop" varchar(50))')
 cur.execute('CREATE TABLE IF NOT EXISTS run      ("id" varchar(32), "bus_id" varchar(10), "route_id" varchar(10), "running_date" DATE, "available" int)')
-cur.execute('CREATE TABLE IF NOT EXISTS passenger("name" varchar(30), "gender" char(1), "no_seats" int, "mobile_num" varchar(10), "age" int)')
+cur.execute('CREATE TABLE IF NOT EXISTS passenger("name" varchar(30), "gender" varchar(15), "no_seats" int, "mobile_num" varchar(10), "age" int, "run_id" varchar(10))')
 cur.execute('CREATE TABLE IF NOT EXISTS booking  ("id" varchar(10), "passenger_id" varchar(10), "run_id" varchar(10))')
