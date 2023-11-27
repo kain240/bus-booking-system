@@ -17,7 +17,17 @@ class Run:
         client.commit()
 
     def delete(self):
-        values= (self.id, self.busId, self.routeId, self.runningDate)
-        Id= cur.execute('select id from run where bus_id= ? and route_id=? and running_date= ?', values)
-        cur.execute('delete from run where id= ?', (Id,))
-        client.commit()
+        values = (self.busId, self.routeId, self.runningDate)
+        cur.execute('select id from run where bus_id= ? and route_id=? and running_date= ? ', values)
+        ids = cur.fetchall()
+
+        if ids:
+            # Extracting the ID properly
+            id_to_delete = ids[0][0]  # Assuming you want to delete the first ID from the result
+
+            # Deleting using the extracted ID
+            cur.execute('DELETE FROM run WHERE id=?', (id_to_delete,))
+            client.commit()
+        else:
+            print("No matching entry found.")
+

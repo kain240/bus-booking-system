@@ -15,7 +15,7 @@ class Operator:
         client.commit()
     def edit(self):
         values = (self.operatorId, self.name, self.address, self.phone, self.email)
-        cur.execute('update operator set id=?, name=?, address=?, phone=?, email=? where id=?', values)
+        cur.execute('update operator set id=?, name=?, address=?, phone=?, email=? where id=?', (values, self.operatorId))
         client.commit()
 
 

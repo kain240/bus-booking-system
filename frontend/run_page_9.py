@@ -56,7 +56,7 @@ def add_run():
     result = messagebox.showinfo('Add New Run', 'New run added successfully')
 
 def delete_run():
-    run.Run(Bus_Id.get(), route_id.get(), Running_Date.get()).delete()
+    run.Run(Bus_Id.get(), route_id.get(), Running_Date.get(), Seat_Available.get()).delete()
     result = messagebox.showinfo('delete Run', 'Run deleted successfully')
 
 Button(root,text="Add Bus",bg="lawngreen", command= add_run).grid(row=6,column=15)
