@@ -41,7 +41,12 @@ def page4():
 
     def fill_ticket_details(data, i):
 
-        ticket_data = data[i]
+        reg_leb = Label(root, text='                                                                      ', font='15')
+        reg_leb.grid(row=7, column=2)
+        try:
+            ticket_data = data[i]
+        except IndexError:
+            reg_leb.config(text='No Ticket is registered with this Mobile Number', font='arial 15', fg='red')
 
         date_list = journey_booking.get_running_date(ticket_data[5])
         date = date_list[2]
