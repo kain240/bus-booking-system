@@ -11,12 +11,8 @@ root.title('Add New Operator')
 
 Label(root,text="\t        \t").grid(row=1,column=1)#image should be centre aligned
 
-def fun():
-    Label(root,text='Select Bus').grid(row=8,column=2)
-    Label(root,text='Operator').grid(row=8,column=4)
-    Label(root,text='Bus Type').grid(row=8,column=6)
-    Label(root,text='Availablity').grid(row=8,column=8)
-    Label(root,text='Fare').grid(row=8,column=10)
+def home():
+    pass
 
 #image
 img=PhotoImage(file="frontend/starbus.png")
@@ -25,7 +21,7 @@ Label(root,image=img).grid(row=1,column=2,columnspan=17)
 
 #home icon
 homeimage=PhotoImage(file="frontend/homeicon.png")
-Button(root,image=homeimage,command=fun,fg="blue2",bg="springgreen").grid(row=1,column=17)
+Button(root, image=homeimage, command=home, fg="blue2", bg="springgreen").grid(row=1, column=17)
 
 #label1 online bus booking system
 Label(root,text="Online Bus Booking System",font="arial 20 bold",bg="light blue",fg="red").grid(row=2,column=2,columnspan=21)
