@@ -160,7 +160,6 @@ def page3():
                     result = messagebox.showinfo('Booking Confirmation', 'Booking confirmed')
                     new_window = Toplevel(root)
                     new_window.title("Bus Ticket")
-
                     screen_width = new_window.winfo_screenwidth()
                     screen_height = new_window.winfo_screenheight()
                     new_window.geometry(f'{screen_width}x{screen_height}')
@@ -169,6 +168,7 @@ def page3():
                     photo = Label(new_window, image=img)
                     photo.image = img  # Keeping a reference to avoid garbage collection
                     photo.grid(row=0, column=2, padx=550)
+
 
                     l1 = Label(new_window, text='Online Bus Booking System', font='Arial 20 ', fg='red', bg='powder blue')
                     l1.grid(row=1, column=2, pady=20)

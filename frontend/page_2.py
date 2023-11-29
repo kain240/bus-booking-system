@@ -1,5 +1,7 @@
 from tkinter import *
 from frontend.page_3 import page3
+from frontend.page_4 import page4
+from frontend.page_5 import page5
 
 reopen_home = False
 
@@ -26,12 +28,14 @@ def page2():
 
 
     def checkBooking():
+        global reopen_home
         root.destroy()
-        import frontend.page_4
+        reopen_home = page4()
 
     def addBus():
+        global reopen_home
         root.destroy()
-        import frontend.page_5
+        reopen_home = page5()
 
     l1= Label(root, text='Online Bus Booking System', font='Arial 35 ', fg='red', bg='powder blue')
     l1.grid(row=1,column=1, pady=50)
