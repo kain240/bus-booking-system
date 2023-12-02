@@ -64,14 +64,41 @@ def page6():
 
     #Add
     def add_operator():
-        operator.Operator(Operator_Id.get(), Operator_Name.get(), Address.get(), Phone.get(), Email.get()).add()
-        result = messagebox.showinfo('Operator entry', 'operator recorded successfully')
+        redflag = True
+        l1 = Label(root, text='                                                             ', fg='red')
+        l1.grid(row=8, column=1, columnspan=17)
+        l2 = Label(root, text='                                                             ', fg='red')
+        l2.grid(row=9, column=1, columnspan=17)
+        l3 = Label(root, text='                                                             ', fg='red')
+        l3.grid(row=10, column=1, columnspan=17)
+        if Operator_Id.get() == '':
+            l1.config(text='Operator Id is a Mandatory field')
+            redflag = False
+
+        if Operator_Name.get() == '':
+            l2.config(text='Name is a Mandatory field')
+            redflag = False
+
+        if len(Phone.get())>10 or len(Phone.get())<10:
+            l3.config(text='Invalid mobile number')
+            redflag = False
+
+        if (redflag == True):
+            operator.Operator(Operator_Id.get(), Operator_Name.get(), Address.get(), Phone.get(), Email.get()).add()
+            result = messagebox.showinfo('Operator entry', 'operator recorded successfully')
 
     Button(root,text="Add",command= add_operator,fg="blue2",bg="springgreen").grid(row=6,column=17)
     #Edit
     def edit_operator():
-        operator.Operator(Operator_Id.get(), Operator_Name.get(), Address.get(), Phone.get(), Email.get()).edit()
-        result = messagebox.showinfo('Operator entry update', 'operator recorde updated successfully')
+        redflag = True
+        l1 = Label(root, text='                                                             ', fg='red')
+        l1.grid(row=8, column=1, columnspan=17)
+        if (Operator_Id.get()==''or Operator_Name.get()==''or Phone.get()==''):
+            l1.config(text='operatoe Id, name and phone number are mendatory fields')
+            redflag = False
+        if redflag == True:
+            operator.Operator(Operator_Id.get(), Operator_Name.get(), Address.get(), Phone.get(), Email.get()).edit()
+            result = messagebox.showinfo('Operator entry update', 'operator recorde updated successfully')
 
     Button(root,text="Edit",fg="blue2",bg="springgreen", command= edit_operator).grid(row=6,column=19)
 

@@ -30,17 +30,21 @@ def page3():
         reopen_home = True
 
 
-
-
     homeimage=PhotoImage(file="frontend/homeicon.png")
     Button(root,image=homeimage,command=home,fg="blue2",bg="springgreen").grid(row=1,column=maxwidth-2, rowspan=2)
     Label(root,text='\t').grid(row=6,column=4)#want some margin
 
     def get_runs():
-        new_booking = journey_booking.Booking( From.get(), To.get(), JourneyDate.get())
+        new_booking = journey_booking.Booking( From.get().lower(), To.get().lower(), JourneyDate.get())
         runs = new_booking.find_runs()
-        print(runs)
-        Show_Bus(runs)
+        l11 = Label(root, text='                                      ', fg='red')
+        l11.grid(row=90, column=2, columnspan=maxwidth)
+        if len(runs)>0:
+            Show_Bus(runs)
+
+        else:
+            l11.config(text='no buses found!!')
+
 
         # update_runs_on_UI(runs)
 
@@ -103,8 +107,8 @@ def page3():
 
         for index, run in enumerate(runs):
             counter += 1
-            ttk.Radiobutton(root, text='Select ' + str(index), variable=selected_bus, value=index,
-                        command=select_bus, style= 'TRadiobutton').grid(row=counter, column=2, columnspan=2, padx=5, pady=5)
+            ttk.Radiobutton(root, text='Select ', variable=selected_bus, value=index,
+                        command=select_bus, style= 'TRadiobutton').grid(row=counter, column=2, columnspan=2, padx=5, pady=3)
             Label(root, text=run[1]).grid(row=counter, column=4, columnspan=2)
             Label(root, text=run[2]).grid(row=counter, column=6, columnspan=2)
             Label(root, text=run[3]).grid(row=counter, column=8, columnspan=2)
@@ -114,7 +118,7 @@ def page3():
         #Label(root,text="").grid(row=109,column=1,columnspan=3)#leaving an empty line
         #fill passenger details
         def fill_passenger_details():
-            Label(root,text="Fill Passenger Details to book the bus ticket",bg="turquoise1",fg="red", font='15').grid(row=110,column=2,columnspan=maxwidth)
+            Label(root,text="Fill Passenger Details to book the bus ticket",bg="turquoise1",fg="red", font='15').grid(row=100,column=2,columnspan=maxwidth)
             Label(root, text="\n").grid(row=111, column=1, columnspan=3)
             Label(root,text="Name").grid(row=112,column=2)
             Name=Entry(root)
@@ -151,10 +155,31 @@ def page3():
                 journey_booking.BookingTicket(Mobile_Number.get(), select_bus()).set_booking()
                 print('done')
             def Book_Seat():
-                passenger.Passenger(Name.get(), show_gender(), No_of_seats.get(), Mobile_Number.get(), Age.get(), select_bus()).add()
+                l22=Label(root, text='                                                                                     ', fg='red')
+                l22.grid(row=200, column=2, columnspan=maxwidth)
+                l33=Label(root, text='                                                                        ', fg='red')
+                l33.grid(row=201, column=2,columnspan=maxwidth)
+                l44=Label(root, text='                                                                        ', fg='red')
+                l44.grid(row=202, column=2, columnspan=maxwidth)
+                redFlag = True
+                seats= bus_booking_details()
+                if(Name.get() == ''):
+                    l22.config(text='please enter your name!!')
+                    redFlag = False
+                if (No_of_seats.get()==''):
+                    l33.config(text='please enter the number of seats needed!!')
+                    redFlag = False
+                elif (int(No_of_seats.get())> int(seats[3])):
+                    l33.config(text='                  seats not available!!                    ')
+                    redFlag = False
+                if(len(Mobile_Number.get())>10 or  len(Mobile_Number.get())<10):
+                    l44.config(text='invalid Mobile Number!!')
+                    redFlag = False
+                if(redFlag == True):
+                    passenger.Passenger(Name.get(), show_gender(), No_of_seats.get(), Mobile_Number.get(), Age.get(), select_bus()).add()
                 #Label(root, text="Booked successfully").grid(row=115, column=2, columnspan=maxwidth)
-                amount= int(No_of_seats.get()) * int(fare_is())
-                result = messagebox.askyesno('Fare Confirm', 'total amount to paid Rs. ' + str(amount))
+                    amount= int(No_of_seats.get()) * int(fare_is())
+                    result = messagebox.askyesno('Fare Confirm', 'total amount to paid Rs. ' + str(amount))
 
                 def view_ticket():
                     result = messagebox.showinfo('Booking Confirmation', 'Booking confirmed')
@@ -215,8 +240,7 @@ def page3():
 
                     Label(fr, text="\t").grid(row=1, column=55)  # want some space
                     Label(fr, text='\n').grid(row=8, column=1)
-                    Label(fr, text="\tTotal amount " + str(amount) + " to be paid at the time of boarding", font= 'bold').grid(row=9, column=1,
-                                                                                                   columnspan=5)
+                    Label(fr, text="\tTotal amount " + str(amount) + " to be paid at the time of boarding", font= 'bold').grid(row=9, column=1, columnspan=5)
 
                     fr.grid(row=6, column=2, columnspan=5)
 

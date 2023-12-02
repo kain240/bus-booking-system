@@ -58,12 +58,26 @@ def page9():
     Label(root,text="\t").grid(row=7,column=14)#some space
 
     def add_run():
-        run.Run(Bus_Id.get(), route_id.get(), Running_Date.get(), Seat_Available.get()).add()
-        result = messagebox.showinfo('Add New Run', 'New run added successfully')
+        redflag = True
+        l1 = Label(root, text='                                                            ', font='10', fg='red')
+        l1.grid(row=15, column=2, columnspan=17)
+        if (Bus_Id.get() == '' or route_id.get() == '' or Running_Date.get() == '' or Seat_Available.get() == ''):
+            l1.config(text='Fill all the fields')
+            redflag = False
+        if redflag == True:
+            run.Run(Bus_Id.get(), route_id.get(), Running_Date.get(), Seat_Available.get()).add()
+            result = messagebox.showinfo('Add New Run', 'New run added successfully')
 
     def delete_run():
-        run.Run(Bus_Id.get(), route_id.get(), Running_Date.get(), Seat_Available.get()).delete()
-        result = messagebox.showinfo('delete Run', 'Run deleted successfully')
+        redflag = True
+        l1 = Label(root, text='                                                            ', font='10', fg='red')
+        l1.grid(row=15, column=2, columnspan=17)
+        if (Bus_Id.get() == '' or route_id.get() == '' or Running_Date.get() == ''):
+            l1.config(text='Fill all the fields')
+            redflag = False
+        if redflag == True:
+            run.Run(Bus_Id.get(), route_id.get(), Running_Date.get(), Seat_Available.get()).delete()
+            result = messagebox.showinfo('delete Run', 'Run deleted successfully')
 
     Button(root,text="Add Bus",bg="lawngreen", command= add_run).grid(row=6,column=15)
     Label(root,text="\t").grid(row=7,column=13)#some space

@@ -53,12 +53,26 @@ def page7():
 
 
     def add_route():
-        route.Route(Route_ID.get(), start.get(), stop.get()).add()
-        result = messagebox.showinfo('Add Bus Route', 'New Bus route added successfully')
+        redflag = True
+        l1 = Label(root, text='                                                            ', font='10', fg='red')
+        l1.grid(row=15, column=2, columnspan=17)
+        if (Route_ID.get() == '' or start.get() == '' or stop.get() == ''):
+            l1.config(text='Fill all the fields')
+            redflag = False
+        if redflag == True:
+            route.Route(Route_ID.get(), start.get(), stop.get()).add()
+            result = messagebox.showinfo('Add Bus Route', 'New Bus route added successfully')
 
     def delete_route():
-        route.Route(Route_ID.get(), start.get(), stop.get()).delete()
-        result = messagebox.showinfo('Delete Bus Route', 'Bus route deleted successfully')
+        redflag = True
+        l1 = Label(root, text='                                                            ', font='10', fg='red')
+        l1.grid(row=15, column=2, columnspan=17)
+        if (Route_ID.get() == '' or start.get() == '' or stop.get() == ''):
+            l1.config(text='Fill all the fields')
+            redflag = False
+        if redflag == True:
+            route.Route(Route_ID.get(), start.get(), stop.get()).delete()
+            result = messagebox.showinfo('Delete Bus Route', 'Bus route deleted successfully')
 
     #add route
     Button(root,text="Add Route",bg="lawn green", command= add_route).grid(row=6,column=11)

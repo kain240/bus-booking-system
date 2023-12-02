@@ -69,14 +69,28 @@ def page8():
     Label(root,text="\t").grid(row=8,column=15)#need some space
 
     def add_bus():
-        Type = clicked.get()
-        bus.Bus(bus_id.get(), Type, capacity.get(), Fare.get(), operator.get()).add()
-        result = messagebox.showinfo('Bus entry', 'Bus details recorded successfully')
+        redflag=True
+        l1= Label(root, text='                                                            ', font='10', fg='red')
+        l1.grid(row=15,column=2,columnspan=17)
+        if(bus_id.get()=='' or capacity.get()=='' or Fare.get()=='' or operator.get()==''):
+            l1.config(text='Fill all the fields')
+            redflag= False
+        if redflag==True:
+            Type = clicked.get()
+            bus.Bus(bus_id.get(), Type, capacity.get(), Fare.get(), operator.get()).add()
+            result = messagebox.showinfo('Bus entry', 'Bus details recorded successfully')
     def edit_bus():
-        bus.Bus(bus_id.get(), 'ac', capacity.get(), Fare.get(), operator.get()).edit()
-        result = messagebox.showinfo('Bus entry Update', 'Bus recorde updated successfully')
+        redflag = True
+        l1 = Label(root, text='                                                            ', font='10', fg='red')
+        l1.grid(row=15, column=2, columnspan=17)
+        if (bus_id.get() == '' or capacity.get() == '' or Fare.get() == '' or operator.get() == ''):
+            l1.config(text='Fill all the fields')
+            redflag = False
+        if redflag == True:
+            bus.Bus(bus_id.get(), 'ac', capacity.get(), Fare.get(), operator.get()).edit()
+            result = messagebox.showinfo('Bus entry Update', 'Bus recorde updated successfully')
 
-    Button(root,text="Add Bus",bg="Lightblue", command= add_bus).grid(row=10,column=2,columnspan=13)
+    Button(root,text="Add Bus",bg="Lightblue", command= add_bus).grid(row=10 ,column=2,columnspan=13)
 
     Label(root,text="\t").grid(row=9,column=3)#need some space
 
